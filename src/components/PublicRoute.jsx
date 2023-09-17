@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
+import Loader from './Loader/Loader';
 
 function PublicRoute({ redirectTo = '/' }) {
   const { token } = useSelector(state => state.auth);
@@ -8,7 +9,7 @@ function PublicRoute({ redirectTo = '/' }) {
   return isAuthenticated ? (
     <Navigate to={redirectTo} />
   ) : (
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense fallback={<Loader/>}>
       <Outlet />
     </Suspense>
   );
