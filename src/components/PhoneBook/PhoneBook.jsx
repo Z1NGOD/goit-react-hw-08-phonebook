@@ -10,7 +10,7 @@ export default function PhoneBook() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [addContact] = useAddContactMutation();
-  const { data: contacts, isFetching } = useGetContactsQuery();
+  const { data: contacts } = useGetContactsQuery();
 
   const isNameExists = (contacts || []).some(contact => contact.name === name);
   const isNumberExists = (contacts || []).some(
@@ -49,7 +49,6 @@ export default function PhoneBook() {
 
   return (
     <>
-      {isFetching && <div>Loading...</div>}
       <Form onSubmit={handleSubmit}>
         <MainText>Phone Book</MainText>
         <Input

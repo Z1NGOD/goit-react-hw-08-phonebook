@@ -1,10 +1,11 @@
 import React from 'react'
+import { MainHeader } from './Header.styled'
 
 function Header() {
   return (
-    <div>
+    <MainHeader>
       Header
-    </div>
+    </MainHeader>
   )
 }
 
