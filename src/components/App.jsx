@@ -8,12 +8,12 @@ import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 export function App() {
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={<HomePage />}/>
-        <Route path='login' element={<LoginPage />}/>
-        <Route path='register' element={<RegisterPage />} />
-        <Route path='*' element={<NotFoundPage />}/>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Routes>
   );
 }

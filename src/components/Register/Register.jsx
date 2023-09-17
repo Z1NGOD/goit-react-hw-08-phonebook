@@ -1,26 +1,27 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Label } from './Login.styled';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useLoginMutation, useRegisterMutation } from 'redux/auth/authApi';
 import { Btn } from 'ui/Btn.styled';
+import { Container } from 'ui/Container.styled';
+import { Text } from 'ui/Text.styled';
+import { Label } from 'components/Login/Login.styled';
 import {
-  Form,
   Input,
+  Form,
   MainText,
 } from 'components/PhoneBook/PhoneBookStyles.styled';
-import { NavLink } from 'react-router-dom';
-import { Text } from 'ui/Text.styled';
-import { Container } from 'ui/Container.styled';
-import { useLoginMutation } from 'redux/auth/authApi';
 import { useDispatch } from 'react-redux';
 import { setToken } from 'redux/auth/Slice';
 
 const INITIAL_STATE = {
+  name: '',
   email: '',
   password: '',
 };
 
-function Login() {
+function Register() {
   const [formData, setFormData] = useState({ ...INITIAL_STATE });
+  const [register] = useRegisterMutation();
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,9 +36,13 @@ function Login() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if ( formData.email && formData.password) {
-      const {data} = await login(formData);
-      if (data) {
+    if (formData.name && formData.email && formData.password) {
+      const response = await register(formData);
+      if (response) {
+        const { data } = await login({
+          email: formData.email,
+          password: formData.password,
+        });
         dispatch(setToken(data.token));
         navigate('/');
       }
@@ -49,8 +54,17 @@ function Login() {
   };
   return (
     <Container>
-      <MainText>Sign In</MainText>
+      <MainText>Register</MainText>
       <Form onSubmit={handleSubmit}>
+        <Label htmlFor="name">Name</Label>
+        <Input
+          type="name"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          placeholder="Your name"
+        />
         <Label htmlFor="email">Email</Label>
         <Input
           type="email"
@@ -58,7 +72,7 @@ function Login() {
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          placeholder='example@gmial.com'
+          placeholder="example@gmail.com"
         />
         <Label htmlFor="password">Password:</Label>
         <Input
@@ -72,11 +86,11 @@ function Login() {
         <Btn type="submit">Submit</Btn>
       </Form>
       <Text>
-        If you don't have the account{' '}
-        <NavLink to="/register">click here</NavLink>
+        If you already have the account{' '}
+        <NavLink to="/login">click here</NavLink>
       </Text>
     </Container>
   );
 }
 
-export default Login;
+export default Register;

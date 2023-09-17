@@ -19,6 +19,13 @@ const Input = styled.input`
   font-size: 16px;
   outline: none;
   margin-bottom: 16px;
+  transition: border-color 0.2s ease-in-out; 
+
+  &:focus {
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle box-shadow when focused */
+  }
+
   ::placeholder {
     color: #888;
   }
