@@ -40,6 +40,8 @@ function Login() {
       if (data) {
         dispatch(setToken(data.token));
         navigate('/');
+      } else if (!data) {
+        alert("You made a mistake or you didn't register");
       }
     }
     reset();
@@ -73,7 +75,6 @@ function Login() {
           title="Password must be between 8 and 12 characters"
           required
         />
-
         <Btn type="submit">Submit</Btn>
       </Form>
       <Text>

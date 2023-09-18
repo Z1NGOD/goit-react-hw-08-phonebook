@@ -45,6 +45,8 @@ function Register() {
         });
         dispatch(setToken(data.token));
         navigate('/');
+      } else if (!response) {
+        alert("You made a mistake try again!");
       }
     }
     reset();
