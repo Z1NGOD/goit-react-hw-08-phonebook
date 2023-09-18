@@ -64,6 +64,7 @@ function Register() {
           value={formData.name}
           onChange={handleInputChange}
           placeholder="Your name"
+          required
         />
         <Label htmlFor="email">Email</Label>
         <Input
@@ -73,6 +74,7 @@ function Register() {
           value={formData.email}
           onChange={handleInputChange}
           placeholder="example@gmail.com"
+          required
         />
         <Label htmlFor="password">Password:</Label>
         <Input
@@ -81,7 +83,10 @@ function Register() {
           name="password"
           value={formData.password}
           onChange={handleInputChange}
-          placeholder='minimum 8 characters'
+          placeholder="Password"
+          pattern=".{8,12}"
+          title="Password must be between 8 and 12 characters"
+          required
         />
         <Btn type="submit">Submit</Btn>
       </Form>

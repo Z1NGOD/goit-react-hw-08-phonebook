@@ -35,8 +35,8 @@ function Login() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if ( formData.email && formData.password) {
-      const {data} = await login(formData);
+    if (formData.email && formData.password) {
+      const { data } = await login(formData);
       if (data) {
         dispatch(setToken(data.token));
         navigate('/');
@@ -58,7 +58,8 @@ function Login() {
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          placeholder='example@gmial.com'
+          placeholder="example@gmial.com"
+          required
         />
         <Label htmlFor="password">Password:</Label>
         <Input
@@ -67,8 +68,12 @@ function Login() {
           name="password"
           value={formData.password}
           onChange={handleInputChange}
-          placeholder='minimum 8 characters'
+          placeholder="Password"
+          pattern=".{8,12}"
+          title="Password must be between 8 and 12 characters"
+          required
         />
+
         <Btn type="submit">Submit</Btn>
       </Form>
       <Text>
